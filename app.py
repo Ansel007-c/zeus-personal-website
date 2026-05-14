@@ -2,7 +2,7 @@
 from flask import Flask, render_template
 import os
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -20,7 +20,7 @@ def contact():
 def projects():
     return render_template("projects.html")
 
+# ⭐ Railway 正确启动方式
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
-    app.run(host="0.0.0.0", port=port)
-
+    app.run(host="0.0.0.0", port=port, debug=False)
