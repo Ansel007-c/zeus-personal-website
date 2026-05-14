@@ -1,5 +1,6 @@
 # 从flask工具包取出Flask功能（类）
 from flask import Flask, render_template
+import os
 
 app = Flask(__name__) 
 
@@ -20,5 +21,6 @@ def projects():
     return render_template("projects.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
 
