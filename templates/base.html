@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的网站</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!--导航栏（所有页面共享）-->
+    <nav class="navbar">
+        <a href="/">首页</a>
+        <a href="/about">关于我</a>
+        <a href="/contact">联系方式</a>
+        <a href="/projects">项目</a>
+    </nav>
+
+    <hr>
+
+    <!--每个页面的“内容区”-->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="mascot">
+        <img src="/static/tiger.png" class="tiger">
+
+        <div class="eye left">
+            <div class="pupil"></div>
+        </div>
+
+        <div class="eye right">
+            <div class="pupil"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.addEventListener("mousemove", function (e) {
+
+        const pupils = document.querySelectorAll(".pupil");
+
+        pupils.forEach(pupil => {
+
+            const eye = pupil.parentElement;
+            const rect = eye.getBoundingClientRect();
+
+            // 眼睛中心点
+            const eyeX = rect.left + rect.width / 2;
+            const eyeY = rect.top + rect.height / 2;
+
+            // 鼠标方向向量
+            const dx = e.clientX - eyeX;
+            const dy = e.clientY - eyeY;
+
+            // 角度
+            const angle = Math.atan2(dy, dx);
+
+            // ⭐控制最大移动半径（关键）
+            const maxMove = 3;
+
+            const moveX = Math.cos(angle) * maxMove;
+            const moveY = Math.sin(angle) * maxMove;
+
+            pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+    });
+</script>
