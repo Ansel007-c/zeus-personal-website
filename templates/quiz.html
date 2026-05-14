@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>三角洲豪意测试</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .q {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>三角洲豪意测试</h1>
+
+        <form action="/submit_quiz" method="POST">
+
+            <div class="q">
+                <p>1. 当你复活二员时：</p>
+                <input type="radio" name="q1" value="A"> A.封烟过<br>
+                <input type="radio" name="q1" value="B"> B.无敌干拉<br>
+            </div>
+
+            <div class="q">
+                <p>2. 在奔跑过程中：</p>
+                <input type="radio" name="q2" value="A"> A.没有多余动作<br>
+                <input type="radio" name="q2" value="B"> B.31抖枪<br>
+            </div>
+
+            <div class="q">
+                <p>3. 当浮力有人在破红砖并且全员水鬼时，你会选择：</p>
+                <input type="radio" name="q3" value="A"> A.隐忍<br>
+                <input type="radio" name="q3" value="B"> B.跳水拼刀<br>
+            </div>
+
+            <div class="q">
+                <p>4. 在对枪时，你的子弹全打中敌人胸口而没有打中头部，却被对方修脚修死，此时你认为：</p>
+                <input type="radio" name="q4" value="A"> A.技不如人<br>
+                <input type="radio" name="q4" value="B"> B.完全马枪<br>
+            </div>
+
+            <div class="q">
+                <p>5. 当你先手偷袭敌人却被反杀，此时你认为：</p>
+                <input type="radio" name="q5" value="A"> A.给了<br>
+                <input type="radio" name="q5" value="B"> B.卡了<br>
+            </div>
+
+            <div style="text-align:center;">
+                <button type="submit">提交豪意测试</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 # 从flask工具包取出Flask功能（类）
 # from flask import Flask, render_template
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 
 app = Flask(__name__)
@@ -27,7 +27,6 @@ def quiz():
 
 @app.route("/submit_quiz", methods=["POST"])
 def submit_quiz():
-
     score = 0
 
     q1 = request.form.get("q1")
@@ -41,33 +40,89 @@ def submit_quiz():
     else:
         score += 1
 
-    if q2 == "B":
-        score += 2
-    else:
+    if q2 == "A":
         score += 1
-
-    if q3 == "B":
+    else:
         score += 2
-    else:
-        score += 1
 
-    if q4 == "B":
+    if q3 == "A":
+        score += 1
+    else:
         score += 2
-    else:
-        score += 1
 
-    if q5 == "B":
+    if q4 == "A":
+        score += 1
+    else:
         score += 2
-    else:
+
+    if q5 == "A":
         score += 1
-
-    if score < 6:
-        return f"你的豪意值：{score}<br>你依然不够豪，继续沉淀"
-
     else:
-        return f"你的豪意值：{score}<br>你从来都不会输，欢迎进入网站"
+        score += 2
+
+    if score >= 6:
+        return redirect(url_for("success", score=score))
+    else:
+        return redirect(url_for("fail", score=score))
+
+@app.route("/success")
+def success():
+    score = request.args.get("score")
+
+    return f"""
+    <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#f5f5f5;
+        font-family:Arial;
+    ">
+        <div style="
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            text-align:center;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        ">
+            <h2>✔ 通过测试,你从来都不会输，恭喜你，成为一位合格的三角洲嘉豪,允许进入网站！</h2>
+            <p>你的分数：{score}</p>
+
+            <a href="/" style="display:block;margin-top:10px;">进入网站</a>
+        </div>
+    </div>
+    """
+
+
+@app.route("/fail")
+def fail():
+    score = request.args.get("score")
+
+    return f"""
+    <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#f5f5f5;
+        font-family:Arial;
+    ">
+        <div style="
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            text-align:center;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        ">
+            <h2>❌ 未通过,你依然不够豪，继续沉淀!!!</h2>
+            <p>你的分数：{score}</p>
+
+            <a href="/quiz">再来一次</a>
+        </div>
+    </div>
+    """
 
 # ⭐ Railway 正确启动方式
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
